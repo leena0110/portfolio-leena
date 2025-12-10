@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Cache System | Leena Sri K</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- Project-specific styles -->
+    <style>
+        .project-hero {
+            background: linear-gradient(135deg, #0A1828 0%, #102238 100%);
+            padding: calc(var(--header-height) + 40px) 0 var(--space-xl);
+            color: var(--text-primary);
+        }
+        
+        .project-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .project-impact {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            margin-bottom: var(--space-xl);
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        
+        .project-meta {
+            display: flex;
+            gap: var(--space-2xl);
+            flex-wrap: wrap;
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: 2px solid rgba(23, 133, 130, 0.3);
+        }
+        
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .meta-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        .meta-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        
+        .project-detail-section {
+            padding: var(--space-xl) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .project-detail-section:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--space-xl);
+        }
+        
+        .detail-label h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin: 0;
+            font-weight: 700;
+        }
+        
+        .detail-content {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        
+        .detail-content p {
+            margin-bottom: var(--space-md);
+        }
+        
+        .detail-content ul {
+            margin-left: var(--space-lg);
+            margin-bottom: var(--space-md);
+        }
+        
+        .detail-content li {
+            margin-bottom: var(--space-xs);
+            color: var(--text-secondary);
+        }
+        
+        .detail-content strong {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+        
+        .arch-card {
+            background: var(--card-bg);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .arch-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary-color);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .arch-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: var(--space-md);
+        }
+        
+        .arch-title {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+            font-weight: 600;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+        
+        .process-step {
+            text-align: center;
+            padding: var(--space-lg);
+            background: var(--surface-alt);
+            border-radius: var(--radius-lg);
+            position: relative;
+            border: 1px solid var(--border-color);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 40px;
+            height: 40px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .step-title {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+            font-weight: 600;
+        }
+        
+        .time-complexity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: var(--space-lg);
+            background: var(--surface-alt);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+        
+        .time-complexity-table th,
+        .time-complexity-table td {
+            padding: var(--space-md);
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .time-complexity-table th {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .time-complexity-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .code-highlight {
+            background: var(--surface-alt);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            margin: var(--space-lg) 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+        
+        .code-highlight pre {
+            margin: 0;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: var(--space-md);
+            margin-top: var(--space-md);
+            flex-wrap: wrap;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-top: var(--space-2xl);
+            padding: var(--space-sm) var(--space-lg);
+            border: 2px solid var(--secondary-color);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background: var(--secondary-color);
+            color: white;
+            gap: var(--space-md);
+            transform: translateX(-5px);
+        }
+        
+        .btn-disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            position: relative;
+        }
+        
+        .btn-disabled:hover::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            white-space: nowrap;
+            margin-bottom: var(--space-xs);
+        }
+        
+        @media (max-width: 768px) {
+            .project-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .project-impact {
+                font-size: 1.2rem;
+            }
+            
+            .detail-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+            }
+            
+            .project-meta {
+                flex-direction: column;
+                gap: var(--space-lg);
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+            
+            .architecture-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .time-complexity-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="../index.html" class="brand">Leena Sri K</a>
+            
+            <button class="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <nav class="main-nav" role="navigation" aria-label="Main Navigation">
+                <a href="../index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="../profile.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="../work.html" class="nav-link">
+                    <i class="fas fa-code"></i>
+                    <span>Work</span>
+                </a>
+                <a href="../credentials.html" class="nav-link">
+                    <i class="fas fa-award"></i>
+                    <span>Credentials</span>
+                </a>
+                <a href="../assets/resume.pdf" target="_blank" rel="noopener" class="nav-link resume">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>Resume</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Project Hero -->
+        <section class="project-hero">
+            <div class="container">
+                <div class="project-hero-content">
+                    <h1>Dynamic Cache System</h1>
+                    <p class="project-impact">High-performance caching system implementing LRU and LFU eviction policies with Doubly Linked Lists and HashMaps for optimal O(1) operations</p>
+                    
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Category</span>
+                            <span class="meta-value">Data Structures & Algorithms</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Language</span>
+                            <span class="meta-value">Python</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Timeline</span>
+                            <span class="meta-value">2 Weeks</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Status</span>
+                            <span class="meta-value">Completed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Details -->
+        <section class="section">
+            <div class="container">
+                <!-- Project Overview -->
+                <div class="project-detail-section">
+                    <div class="detail-grid">
+                        <div class="detail-label">
+                            <h3>Project Overview</h3>
+                        </div>
+                        <div class="detail-content">
+                            <p>Caching is a fundamental technique used to improve the performance of software systems by storing frequently accessed data in a high-speed memory layer. This project implements a dynamic cache system with multiple eviction policies and a menu-driven interface for real-time interaction.</p>
+                            <p>The system demonstrates efficient cache operations with O(1) time complexity for both read and write operations, achieved through intelligent data structure combinations.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Architecture -->
+                <div class="project-detail-section">
+                    <div class="detail-label">
+                        <h3>System Architecture</h3>
+                    </div>
+                    <div class="detail-content">
+                        <p>The cache system combines three key data structures for optimal performance:</p>
+                        
+                        <div class="architecture-grid">
+                            <div class="arch-card">
+                                <div class="arch-icon">
+                                    <i class="fas fa-link"></i>
+                                </div>
+                                <h4 class="arch-title">Doubly Linked List (DLL)</h4>
+                                <p>Maintains order of cache access, allowing O(1) insertion and deletion from both ends (head and tail). Efficiently tracks the most and least recently used items, essential for LRU eviction.</p>
+                            </div>
+                            
+                            <div class="arch-card">
+                                <div class="arch-icon">
+                                    <i class="fas fa-sitemap"></i>
+                                </div>
+                                <h4 class="arch-title">HashMap (Dictionary)</h4>
+                                <p>Enables O(1) average-time lookups of cache entries by key. Ensures fast access to nodes, facilitating quick operations in the cache.</p>
+                            </div>
+                            
+                            <div class="arch-card">
+                                <div class="arch-icon">
+                                    <i class="fas fa-project-diagram"></i>
+                                </div>
+                                <h4 class="arch-title">Integrated Design</h4>
+                                <p>The DLL and HashMap work together to ensure efficient cache operations, with the DLL tracking the access order and the HashMap providing fast lookups.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cache Write (Write-Through) -->
+                <div class="project-detail-section">
+                    <div class="detail-label">
+                        <h3>Cache Write (Write-Through)</h3>
+                    </div>
+                    <div class="detail-content">
+                        <p>The write-through caching strategy ensures data consistency between cache and memory:</p>
+                        
+                        <div class="process-steps">
+                            <div class="process-step">
+                                <div class="step-number">1</div>
+                                <h4 class="step-title">Client Write</h4>
+                                <p>When a client sends a write request to update or insert data, the cache layer intercepts the request before it reaches the underlying data store.</p>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-number">2</div>
+                                <h4 class="step-title">Cache Update</h4>
+                                <p>The cache layer updates the cached data to reflect the changes made by the client's write request.</p>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-number">3</div>
+                                <h4 class="step-title">Downstream Update</h4>
+                                <p>The cache layer then forwards the write request to the underlying data store, ensuring that the data is persistently updated in the primary data source.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cache Access (Read-Through) -->
+                <div class="project-detail-section">
+                    <div class="detail-label">
+                        <h3>Cache Access (Read-Through)</h3>
+                    </div>
+                    <div class="detail-content">
+                        <div class="process-steps">
+                            <div class="process-step">
+                                <div class="step-number">1</div>
+                                <h4 class="step-title">Client Request</h4>
+                                <p>When a client sends a request for data, the cache layer is the first point of access via the menu-driven process before it reaches the underlying data store.</p>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-number">2</div>
+                                <h4 class="step-title">Cache Lookup</h4>
+                                <p>The cache layer checks if the requested data is available in the cache. If found, it's immediately returned to the client with fast response time.</p>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-number">3</div>
+                                <h4 class="step-title">Cache Miss Handling</h4>
+                                <p>If data is not found in cache, it immediately notifies the user about the status and continues running until the user chooses to exit.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cache Eviction Policies -->
+                <div class="project-detail-section">
+                    <div class="detail-label">
+                        <h3>Cache Eviction Policies</h3>
+                    </div>
+                    <div class="detail-content">
+                        <div class="process-steps">
+                            <div class="process-step">
+                                <div class="step-number">1</div>
+                                <h4 class="step-title">LRU Policy</h4>
+                                <p>The LRU policy removes the least recently used item from the cache when capacity is reached. Implemented efficiently using doubly-linked list for constant-time operations.</p>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-number">2</div>
+                                <h4 class="step-title">Access Tracking</h4>
+                                <p>The cache maintains timestamps for each cached item. When eviction is required, the item with the oldest timestamp is removed.</p>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-number">3</div>
+                                <h4 class="step-title">Efficient Implementation</h4>
+                                <p>Combined with a data structure like a doubly-linked list, allowing for constant-time insertions, removals, and updates of access timestamps.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="project-detail-section">
+                    <div class="detail-label">
+                        <h3>Performance Metrics Calculator</h3>
+                    </div>
+                    <div class="detail-content">
+                        <div class="process-steps">
+                            <div class="process-step">
+                                <h4 class="step-title">Hit Rate</h4>
+                                <p>Tracks the cache hit rate - ratio of successful cache lookups to total requests. High hit rate indicates efficient cache configuration.</p>
+                            </div>
+                            
+                            <div class="process-step">
+                                <h4 class="step-title">Miss Rate</h4>
+                                <p>Monitors cache miss rate - ratio of cache misses to total requests. Low miss rate suggests effective serving of frequently accessed data.</p>
+                            </div>
+                            
+                            <div class="process-step">
+                                <h4 class="step-title">Eviction Rates</h4>
+                                <p>Tracks cache eviction rates, providing visibility into effectiveness of chosen eviction policy and overall cache capacity management.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Time Complexity Analysis -->
+                <div class="project-detail-section">
+                    <div class="detail-label">
+                        <h3>Time Complexity Analysis</h3>
+                    </div>
+                    <div class="detail-content">
+                        <table class="time-complexity-table">
+                            <thead>
+                                <tr>
+                                    <th>Module</th>
+                                    <th>Worst Time Complexity</th>
+                                    <th>Justification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Cache Initialization</td>
+                                    <td>O(1)</td>
+                                    <td>Constant time for pointer manipulations and hash map initialization</td>
+                                </tr>
+                                <tr>
+                                    <td>Cache Access (get)</td>
+                                    <td>O(1)</td>
+                                    <td>HashMap provides constant-time lookups</td>
+                                </tr>
+                                <tr>
+                                    <td>Cache Insertion (put)</td>
+                                    <td>O(1) Amortized</td>
+                                    <td>Involves constant time insertion and potential eviction</td>
+                                </tr>
+                                <tr>
+                                    <td>LRU Eviction</td>
+                                    <td>O(1)</td>
+                                    <td>Doubly Linked List allows constant-time tail removal</td>
+                                </tr>
+                                <tr>
+                                    <td>Cache Display</td>
+                                    <td>O(n)</td>
+                                    <td>Traverses entire DLL; linear time relative to cache entries</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="code-highlight">
+                            <pre># Key Operations Complexity
+__init__: O(1)          # Initialization
+_add_to_head: O(1)      # DLL insertion
+_remove_node: O(1)      # DLL removal  
+_move_to_head: O(1)     # DLL reordering
+_get_edge: O(1)         # HashMap lookup
+access: O(1)            # Cache access
+add_access: O(1)        # Cache update
+display_cache: O(n)     # Traversal for display</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu-Driven Interface -->
+                <div class="project-detail-section">
+                    <div class="detail-label">
+                        <h3>Menu-Driven Interface</h3>
+                    </div>
+                    <div class="detail-content">
+                        <p>The system features an interactive console interface that allows users to:</p>
+                        <ul>
+                            <li><strong>Write to Cache:</strong> Insert or update key-value pairs with automatic eviction when capacity is reached</li>
+                            <li><strong>Access Cache:</strong> Retrieve values with real-time hit/miss tracking</li>
+                            <li><strong>Display Cache State:</strong> View current cache contents and performance metrics</li>
+                            <li><strong>Flush Cache to Memory:</strong> Write all cache contents to persistent storage</li>
+                            <li><strong>Real-time Metrics:</strong> Monitor hit ratios, miss ratios, and eviction rates</li>
+                        </ul>
+                        
+                        <div class="code-highlight">
+                            <pre># Menu Interface Example
+Cache Menu:
+1. Write to Cache
+2. Access Cache  
+3. Display Cache State
+4. Flush Cache to Memory
+5. Exit
+
+Enter your choice: 1
+Enter key: 101
+Enter value: "User Data"
+Added (101, "User Data") to cache.</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Implementation -->
+                <div class="project-detail-section">
+                    <div class="detail-label">
+                        <h3>Technical Implementation</h3>
+                    </div>
+                    <div class="detail-content">
+                        <p><strong>Core Classes:</strong></p>
+                        <ul>
+                            <li><strong>DLL (Doubly Linked List):</strong> Manages cache item order with O(1) operations</li>
+                            <li><strong>DynamicCache:</strong> Main cache class integrating DLL and HashMap</li>
+                            <li><strong>CachePerformanceMetrics:</strong> Tracks and calculates performance statistics</li>
+                            <li><strong>CacheVisualizer:</strong> Provides visualization of cache state and metrics</li>
+                        </ul>
+                        
+                        <p><strong>Key Features:</strong></p>
+                        <ul>
+                            <li>Configurable cache capacity and eviction policy (LRU/LFU)</li>
+                            <li>Write-through caching for data consistency</li>
+                            <li>Real-time performance monitoring</li>
+                            <li>Interactive user interface</li>
+                            <li>Memory persistence options</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div class="project-detail-section">
+                    <div class="detail-label">
+                        <h3>Project Links</h3>
+                    </div>
+                    <div class="detail-content">
+                        <div class="project-links">
+                            <button class="btn btn-primary btn-disabled" title="Repository coming soon">
+                                <i class="fab fa-github"></i> View Source Code
+                            </button>
+                            <button class="btn btn-secondary btn-disabled" title="Report coming soon">
+                                <i class="fas fa-file-pdf"></i> View Project Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Back Link -->
+                <a href="../work.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back to Projects
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Personal Info -->
+                <div class="footer-col">
+                    <h4 class="footer-title">Leena Sri K</h4>
+                    <p class="footer-subtitle">Computer Science Engineer</p>
+                    <p class="footer-location">Coimbatore, Tamil Nadu</p>
+                </div>
+                
+                <!-- Social Links -->
+                <div class="footer-col">
+                    <h4 class="footer-title">Connect</h4>
+                    <div class="footer-social">
+                        <a href="https://github.com/leena0110" target="_blank" class="social-btn">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="https://linkedin.com/in/leena-sri-k-65828a393" target="_blank" class="social-btn">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                        <a href="mailto:leenasri0110@gmail.com" class="social-btn">
+                            <i class="fas fa-envelope"></i> Email
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; <span id="current-year">2025</span> Leena Sri K. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/script.js"></script>
+    <script>
+        // Set current year in copyright
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

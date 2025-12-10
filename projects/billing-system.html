@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RITE ELECTRICALS – Billing & Inventory Management System | Leena Sri K</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- Project-specific styles -->
+    <style>
+        .project-hero {
+            background: linear-gradient(135deg, #0A1828 0%, #102238 100%);
+            padding: calc(var(--header-height) + 40px) 0 var(--space-xl);
+            color: var(--text-primary);
+        }
+        
+        .project-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .project-impact {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            margin-bottom: var(--space-xl);
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        
+        .project-meta {
+            display: flex;
+            gap: var(--space-2xl);
+            flex-wrap: wrap;
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: 2px solid rgba(23, 133, 130, 0.3);
+        }
+        
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .meta-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        .meta-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        
+        .project-detail-section {
+            padding: var(--space-xl) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .project-detail-section:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--space-xl);
+        }
+        
+        .detail-label h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin: 0;
+            font-weight: 700;
+        }
+        
+        .detail-content {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        
+        .detail-content p {
+            margin-bottom: var(--space-md);
+        }
+        
+        .detail-content ul {
+            margin-left: var(--space-lg);
+            margin-bottom: var(--space-md);
+        }
+        
+        .detail-content li {
+            margin-bottom: var(--space-xs);
+            color: var(--text-secondary);
+        }
+        
+        .detail-content strong {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .project-structure {
+            background: var(--surface-alt);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            margin: var(--space-lg) 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .project-structure pre {
+            margin: 0;
+            overflow-x: auto;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary-color);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .feature-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .business-impact {
+            background: linear-gradient(135deg, rgba(23, 133, 130, 0.1), rgba(191, 161, 129, 0.1));
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin: var(--space-lg) 0;
+            border: 1px solid rgba(23, 133, 130, 0.2);
+        }
+        
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+        
+        .impact-stat {
+            text-align: center;
+            padding: var(--space-lg);
+            background: white;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .impact-stat:hover {
+            transform: translateY(-3px);
+            border-color: var(--secondary-color);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .impact-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            margin-bottom: var(--space-xs);
+            line-height: 1;
+        }
+        
+        .impact-label {
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .impact-description {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: var(--space-xs);
+        }
+        
+        .data-files-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+        
+        .data-file-card {
+            background: var(--card-bg);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+        
+        .file-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-sm);
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+        }
+        
+        .file-name {
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .file-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        .auth-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+        
+        .auth-card {
+            background: var(--card-bg);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        .auth-role {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .auth-details {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        .tech-stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+        
+        .tech-item {
+            background: var(--surface-alt);
+            padding: var(--space-md);
+            border-radius: var(--radius-sm);
+            text-align: center;
+            font-weight: 600;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .project-links {
+            display: flex;
+            gap: var(--space-md);
+            margin-top: var(--space-md);
+            flex-wrap: wrap;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-top: var(--space-2xl);
+            padding: var(--space-sm) var(--space-lg);
+            border: 2px solid var(--secondary-color);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background: var(--secondary-color);
+            color: white;
+            gap: var(--space-md);
+            transform: translateX(-5px);
+        }
+        
+        .btn-disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            position: relative;
+        }
+        
+        .btn-disabled:hover::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            white-space: nowrap;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .details-summary {
+            cursor: pointer;
+            padding: var(--space-sm);
+            background: var(--surface-alt);
+            border-radius: var(--radius-sm);
+            margin: var(--space-xs) 0;
+            border: 1px solid var(--border-color);
+        }
+        
+        .details-content {
+            padding: var(--space-md);
+            background: white;
+            border-radius: var(--radius-sm);
+            margin-top: var(--space-xs);
+            border: 1px solid var(--border-color);
+        }
+        
+        @media (max-width: 768px) {
+            .project-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .project-impact {
+                font-size: 1.2rem;
+            }
+            
+            .detail-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+            }
+            
+            .project-meta {
+                flex-direction: column;
+                gap: var(--space-lg);
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .impact-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .data-files-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .auth-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .impact-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .impact-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="../index.html" class="brand">Leena Sri K</a>
+            
+            <button class="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <nav class="main-nav" role="navigation" aria-label="Main Navigation">
+                <a href="../index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="../profile.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="../work.html" class="nav-link">
+                    <i class="fas fa-code"></i>
+                    <span>Work</span>
+                </a>
+                <a href="../credentials.html" class="nav-link">
+                    <i class="fas fa-award"></i>
+                    <span>Credentials</span>
+                </a>
+                <a href="../assets/resume.pdf" target="_blank" rel="noopener" class="nav-link resume">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>Resume</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Project Hero -->
+        <section class="project-hero">
+            <div class="container">
+                <div class="project-hero-content">
+                    <h1>RITE ELECTRICALS Billing & Inventory System</h1>
+                    <p class="project-impact">A production-ready desktop application for automated billing, inventory tracking, customer management, and sales analytics for electrical goods businesses</p>
+                    
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Application Type</span>
+                            <span class="meta-value">Desktop Application</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Storage</span>
+                            <span class="meta-value">CSV File System</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Business Scale</span>
+                            <span class="meta-value">500+ Daily Transactions</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Status</span>
+                            <span class="meta-value">Production Ready</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Details -->
+        <section class="section">
+            <div class="container">
+                <!-- Project Overview -->
+                <div class="project-detail-section">
+                    <div class="detail-grid">
+                        <div class="detail-label">
+                            <h3>Project Overview</h3>
+                        </div>
+                        <div class="detail-content">
+                            <p>The <strong>RITE ELECTRICALS Billing System</strong> is a full-scale business automation tool designed specifically for electrical goods businesses that:</p>
+                            <ul>
+                                <li>Handles 500+ daily transactions efficiently</li>
+                                <li>Manages real-time inventory using FIFO (First-In-First-Out) method</li>
+                                <li>Automates GST billing (18% = 9% CGST + 9% SGST)</li>
+                                <li>Tracks complete customer histories and credit systems</li>
+                                <li>Generates and sends digital receipts via WhatsApp</li>
+                                <li>Supports multi-user roles (Admin & User)</li>
+                                <li>Exports comprehensive business reports in CSV format</li>
+                            </ul>
+                            
+                            <div class="project-structure">
+                                <pre># Project Structure
+src/
+├── app/
+│   ├── main.py                # Application entry point
+│   ├── config/
+│   │   └── colors.py          # UI themes and color configurations
+│   ├── ui/
+│   │   ├── main_window.py     # Main user interface window
+│   │   └── dialogs.py         # Popup dialogs and forms
+│   ├── models/
+│   │   ├── product.py         # Product data model
+│   │   └── customer.py        # Customer data model
+│   ├── utils/
+│   │   ├── file_operations.py # CSV file read/write operations
+│   │   ├── calculations.py    # GST, totals, stock calculations
+│   │   └── reports.py         # CSV report generation
+│   └── features/
+│       ├── admin_features.py  # Admin-specific functionality
+│       └── billing_operations.py # Core billing operations
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Impact -->
+                <div class="project-detail-section">
+                    <div class="detail-grid">
+                        <div class="detail-label">
+                            <h3>Business Impact</h3>
+                        </div>
+                        <div class="detail-content">
+                            <div class="business-impact">
+                                <p><strong>Transformational Results for Electrical Businesses:</strong></p>
+                                
+                                <div class="impact-stats">
+                                    <div class="impact-stat">
+                                        <div class="impact-value">500+</div>
+                                        <div class="impact-label">Daily Transactions</div>
+                                        <div class="impact-description">Automated billing operations</div>
+                                    </div>
+                                    
+                                    <div class="impact-stat">
+                                        <div class="impact-value">10→2</div>
+                                        <div class="impact-label">Minutes per Bill</div>
+                                        <div class="impact-description">Reduced billing time dramatically</div>
+                                    </div>
+                                    
+                                    <div class="impact-stat">
+                                        <div class="impact-value">300+</div>
+                                        <div class="impact-label">Monthly Invoices</div>
+                                        <div class="impact-description">Delivered via WhatsApp</div>
+                                    </div>
+                                    
+                                    <div class="impact-stat">
+                                        <div class="impact-value">0</div>
+                                        <div class="impact-label">Stock Discrepancies</div>
+                                        <div class="impact-description">Eliminated through FIFO tracking</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Features -->
+                <div class="project-detail-section">
+                    <div class="detail-label">
+                        <h3>Key Features</h3>
+                    </div>
+                    <div class="detail-content">
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <div class="feature-header">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-lock"></i>
+                                    </div>
+                                    <div class="feature-title">Authentication System</div>
+                                </div>
+                                <p>Secure role-based access with Admin & User roles. Restricted access for sensitive operations like product rate changes and data deletion.</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-header">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-boxes"></i>
+                                    </div>
+                                    <div class="feature-title">FIFO Inventory</div>
+                                </div>
+                                <p>First-In-First-Out stock management with automated updates on purchase/sale. Real-time stock level alerts and tracking of opening/closing stock.</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-header">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-file-invoice-dollar"></i>
+                                    </div>
+                                    <div class="feature-title">GST Billing System</div>
+                                </div>
+                                <p>Automated GST calculation (18% = 9% CGST + 9% SGST). Supports both retail and wholesale pricing with printable receipts.</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-header">
+                                    <div class="feature-icon">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </div>
+                                    <div class="feature-title">WhatsApp Integration</div>
+                                </div>
+                                <p>Automated digital receipt delivery via WhatsApp. Customers receive invoices instantly on their mobile devices.</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-header">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div class="feature-title">Customer Management</div>
+                                </div>
+                                <p>Complete customer database with purchase history tracking. Credit system management and auto-suggest search functionality.</p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-header">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-chart-bar"></i>
+                                    </div>
+                                    <div class="feature-title">Reporting & Analytics</div>
+                                </div>
+                                <p>Daily/Monthly/Custom sales reports. Stock summary analytics with CSV export capability for external analysis.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="details-summary">
+                            <strong>📦 Inventory Management (FIFO-Based)</strong>
+                            <div class="details-content">
+                                <ul>
+                                    <li>Auto-updates on purchase and sale transactions</li>
+                                    <li>Complete stock tracking: Opening, Closing, Purchased, Sold</li>
+                                    <li>Real-time low stock alerts and warnings</li>
+                                    <li>FIFO (First-In-First-Out) valuation for accurate costing</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="details-summary">
+                            <strong>🧾 Billing System Features</strong>
+                            <div class="details-content">
+                                <ul>
+                                    <li>Product selection with real-time stock preview</li>
+                                    <li>Automatic GST calculation (CGST + SGST)</li>
+                                    <li>Support for Cash and Credit payment modes</li>
+                                    <li>Printable physical receipts + Digital WhatsApp receipts</li>
+                                    <li>Discount and promotional pricing support</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Storage & Files -->
+                <div class="project-detail-section">
+                    <div class="detail-grid">
+                        <div class="detail-label">
+                            <h3>Data Storage System</h3>
+                        </div>
+                        <div class="detail-content">
+                            <p>The application uses CSV files for data persistence, making it lightweight and portable:</p>
+                            
+                            <div class="data-files-grid">
+                                <div class="data-file-card">
+                                    <div class="file-header">
+                                        <div class="file-icon">
+                                            <i class="fas fa-box"></i>
+                                        </div>
+                                        <div class="file-name">products.csv</div>
+                                    </div>
+                                    <div class="file-description">Product catalog with SKU, name, rate, GST, stock levels, and category information</div>
+                                </div>
+                                
+                                <div class="data-file-card">
+                                    <div class="file-header">
+                                        <div class="file-icon">
+                                            <i class="fas fa-user-friends"></i>
+                                        </div>
+                                        <div class="file-name">customers.csv</div>
+                                    </div>
+                                    <div class="file-description">Customer database with contact details, purchase history, and credit information</div>
+                                </div>
+                                
+                                <div class="data-file-card">
+                                    <div class="file-header">
+                                        <div class="file-icon">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </div>
+                                        <div class="file-name">sales_receipts.csv</div>
+                                    </div>
+                                    <div class="file-description">Complete sales transaction records with timestamps and payment details</div>
+                                </div>
+                                
+                                <div class="data-file-card">
+                                    <div class="file-header">
+                                        <div class="file-icon">
+                                            <i class="fas fa-truck-loading"></i>
+                                        </div>
+                                        <div class="file-name">purchases.csv</div>
+                                    </div>
+                                    <div class="file-description">Purchase order records from suppliers with quantity and pricing details</div>
+                                </div>
+                                
+                                <div class="data-file-card">
+                                    <div class="file-header">
+                                        <div class="file-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </div>
+                                        <div class="file-name">future_rate_changes.csv</div>
+                                    </div>
+                                    <div class="file-description">Scheduled product rate changes for future effective dates</div>
+                                </div>
+                            </div>
+                            
+                            <p><strong>Dynamic Files:</strong> <code>bill_*.csv</code> and <code>receipt_*.txt</code> are generated for each transaction for record-keeping and printing.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Authentication System -->
+                <div class="project-detail-section">
+                    <div class="detail-grid">
+                        <div class="detail-label">
+                            <h3>Authentication & Security</h3>
+                        </div>
+                        <div class="detail-content">
+                            <p>Role-based access control with two user types:</p>
+                            
+                            <div class="auth-grid">
+                                <div class="auth-card">
+                                    <div class="auth-role">Admin User</div>
+                                    <div class="auth-details">
+                                        <p><strong>Username:</strong> admin</p>
+                                        <p><strong>Password:</strong> admin123</p>
+                                        <p><strong>Permissions:</strong> Full system access including product management, rate changes, and reporting</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="auth-card">
+                                    <div class="auth-role">Regular User</div>
+                                    <div class="auth-details">
+                                        <p><strong>Username:</strong> user</p>
+                                        <p><strong>Password:</strong> user123</p>
+                                        <p><strong>Permissions:</strong> Billing operations, customer management, and basic reporting</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Implementation -->
+                <div class="project-detail-section">
+                    <div class="detail-grid">
+                        <div class="detail-label">
+                            <h3>Technical Implementation</h3>
+                        </div>
+                        <div class="detail-content">
+                            <p><strong>Tech Stack:</strong></p>
+                            <div class="tech-stack-grid">
+                                <div class="tech-item">Python 3.8+</div>
+                                <div class="tech-item">Tkinter GUI</div>
+                                <div class="tech-item">CSV Storage</div>
+                                <div class="tech-item">tkcalendar</div>
+                                <div class="tech-item">Webbrowser API</div>
+                            </div>
+                            
+                            <p><strong>Design Patterns Used:</strong></p>
+                            <ul>
+                                <li><strong>MVC Architecture:</strong> Clear separation between Models, Views, and Controllers</li>
+                                <li><strong>Factory Pattern:</strong> For creating standardized UI widgets and components</li>
+                                <li><strong>Observer Pattern:</strong> For real-time updates between different modules</li>
+                                <li><strong>Modular Component Design:</strong> Independent, reusable components</li>
+                            </ul>
+                            
+                            <p><strong>Performance Optimizations:</strong></p>
+                            <ul>
+                                <li><strong>Lazy Loading:</strong> Data loaded on-demand to reduce initial startup time</li>
+                                <li><strong>Caching:</strong> Frequently accessed data cached in memory</li>
+                                <li><strong>Batch File Operations:</strong> Efficient CSV read/write operations</li>
+                                <li><strong>Non-blocking UI:</strong> Background processing for long operations</li>
+                            </ul>
+                            
+                            <p><strong>WhatsApp Integration:</strong> Uses webbrowser API to open WhatsApp Web with pre-filled message containing invoice details for instant delivery to customers.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Installation & Setup -->
+                <div class="project-detail-section">
+                    <div class="detail-grid">
+                        <div class="detail-label">
+                            <h3>Installation & Setup</h3>
+                        </div>
+                        <div class="detail-content">
+                            <div class="project-structure">
+                                <pre># Installation Steps
+
+1️⃣ Clone the Repository
+git clone https://github.com/yourusername/rite-electricals-billing-system.git
+cd rite-electricals-billing-system
+
+2️⃣ Install Dependencies
+pip install -r requirements.txt
+
+3️⃣ Run the Application
+python main.py
+
+# Default Login Credentials
+Admin: admin / admin123
+User: user / user123</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div class="project-detail-section">
+                    <div class="detail-label">
+                        <h3>Project Links</h3>
+                    </div>
+                    <div class="detail-content">
+                        <div class="project-links">
+                            <button class="btn btn-primary btn-disabled" title="Repository coming soon">
+                                <i class="fab fa-github"></i> View Source Code
+                            </button>
+                            <button class="btn btn-secondary btn-disabled" title="Report coming soon">
+                                <i class="fas fa-file-pdf"></i> View Project Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Back Link -->
+                <a href="../work.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back to Projects
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Personal Info -->
+                <div class="footer-col">
+                    <h4 class="footer-title">Leena Sri K</h4>
+                    <p class="footer-subtitle">Computer Science Engineer</p>
+                    <p class="footer-location">Coimbatore, Tamil Nadu</p>
+                </div>
+                
+                <!-- Social Links -->
+                <div class="footer-col">
+                    <h4 class="footer-title">Connect</h4>
+                    <div class="footer-social">
+                        <a href="https://github.com/leena0110" target="_blank" class="social-btn">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="https://linkedin.com/in/leena-sri-k-65828a393" target="_blank" class="social-btn">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                        <a href="mailto:leenasri0110@gmail.com" class="social-btn">
+                            <i class="fas fa-envelope"></i> Email
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; <span id="current-year">2025</span> Leena Sri K. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/script.js"></script>
+    <script>
+        // Set current year in copyright
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Toggle details sections
+        document.addEventListener('DOMContentLoaded', function() {
+            const detailsSummaries = document.querySelectorAll('.details-summary');
+            detailsSummaries.forEach(summary => {
+                summary.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    content.style.display = content.style.display === 'block' ? 'none' : 'block';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work | Leena Sri K</title>
+    <meta name="description" content="Portfolio projects by Leena Sri K - Full-stack development, cloud computing, and edge computing projects.">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Work page specific styles -->
+    <style>
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        /* Hero Section */
+        .work-hero {
+            background: linear-gradient(135deg, rgba(10, 24, 40, 0.9), rgba(16, 34, 56, 0.9));
+            padding: calc(var(--header-height) + 40px) 0 var(--space-lg); /* Reduced from var(--space-xl) */
+            text-align: center;
+            margin-bottom: var(--space-2xl); /* Reduced from var(--space-3xl) */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .work-hero h1 {
+            font-size: 3rem; /* Reduced from 4rem */
+            margin-bottom: var(--space-xs); /* Reduced */
+            color: white;
+            animation: slideInUp 0.8s ease-out;
+            position: relative;
+        }
+
+        .work-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="%23178782" opacity="0.2"/></svg>') repeat;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        
+        
+        .work-hero .subtitle {
+            font-size: 1.2rem; /* Reduced from 1.4rem */
+            color: var(--secondary-color);
+            font-weight: 500;
+            animation: slideInUp 0.8s ease-out 0.2s both;
+            position: relative;
+            max-width: 600px; /* Reduced from 700px */
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        /* Project Stats */
+        .project-stats {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-2xl);
+            margin-top: var(--space-2xl);
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+        
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+        
+        /* Reduce stat sizes too */
+        .stat-number {
+            font-size: 2.5rem; /* Reduced from 3rem */
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: var(--space-xs);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 0.9rem; /* Reduced from 1rem */
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl); /* Reduced from var(--space-2xl) */
+            flex-wrap: wrap;
+            animation: fadeIn 0.8s ease-out 0.6s both;
+        }
+
+        .filter-tab {
+            padding: 8px 20px; /* Reduced from var(--space-sm) var(--space-xl) */
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 30px;
+            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px; /* Reduced */
+            font-size: 0.9rem; /* Add this */
+        }
+        
+        .filter-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+        }
+        
+        .filter-tab.active {
+            background: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+        
+        /* Projects Grid - Enhanced */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .project-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            animation: slideInUp 0.8s ease-out forwards;
+            position: relative;
+            height: 100%; /* Add this for equal height */
+            display: flex;
+            flex-direction: column; /* Add this for proper layout */
+        }
+        
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        
+        .project-card:hover {
+            transform: translateY(-8px); /* Reduced from -15px */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12); /* Reduced shadow */
+            border-color: var(--secondary-color);
+        }
+        
+        .project-image {
+            height: 180px; /* Reduced from 220px */
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0; /* Prevent image from shrinking */
+        }
+
+        .project-content {
+            padding: var(--space-lg); /* Reduced from var(--space-xl) */
+            position: relative;
+            flex-grow: 1; /* Make content take available space */
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(10, 24, 40, 0.8));
+            z-index: 1;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+        
+        .project-badge {
+            position: absolute;
+            top: var(--space-md);
+            right: var(--space-md);
+            background: var(--secondary-color);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+            animation: pulse 2s infinite;
+        }
+        
+        .project-title {
+            font-size: 1.4rem; /* Reduced from 1.6rem */
+            margin-bottom: var(--space-sm); /* Reduced from var(--space-md) */
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        
+        
+        .project-title i {
+            color: var(--secondary-color);
+        }
+        
+        .project-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-md); /* Reduced from var(--space-lg) */
+            font-size: 0.95rem; /* Reduced from 1.05rem */
+            flex-grow: 1; /* Push tech tags and buttons down */
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xs); /* Reduced from var(--space-sm) */
+            margin-bottom: var(--space-lg); /* Reduced from var(--space-xl) */
+        }
+
+        .tech-tag {
+            background: var(--surface-alt);
+            color: var(--text-primary);
+            padding: 4px 12px; /* Reduced padding */
+            border-radius: 16px; /* Slightly smaller */
+            font-size: 0.8rem; /* Reduced from 0.85rem */
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .tech-tag:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .project-footer {
+            display: flex;
+            gap: var(--space-sm); /* Reduced from var(--space-md) */
+            margin-top: auto; /* Push to bottom */
+        }
+
+        .btn {
+            padding: 10px 20px; /* Reduced from var(--space-sm) var(--space-xl) */
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px; /* Reduced gap */
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-size: 0.9rem; /* Reduced from 0.95rem */
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--secondary-color);
+            color: white;
+            flex: 1;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(23, 135, 130, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border-color: var(--border-color);
+            flex: 1;
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            position: relative;
+        }
+        
+        .btn-disabled:hover::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            white-space: nowrap;
+            margin-bottom: var(--space-xs);
+        }
+        
+        /* View More Section */
+        .view-more {
+            text-align: center;
+            padding: var(--space-3xl) 0;
+            background: linear-gradient(135deg, rgba(10, 24, 40, 0.03), rgba(16, 34, 56, 0.03));
+            border-radius: var(--radius-lg);
+            margin-top: var(--space-2xl);
+            animation: fadeIn 1s ease-out 0.8s both;
+        }
+        
+        .view-more h3 {
+            font-size: 2rem;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+        
+        .view-more p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto var(--space-xl);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--secondary-color);
+            border: 2px solid var(--secondary-color);
+            padding: var(--space-md) var(--space-xl);
+            font-size: 1.1rem;
+            display: inline-block; /* Change from default if needed */
+            width: auto; /* Don't take full width */
+            min-width: 180px; /* Set minimum width */
+        }
+        
+        .btn-outline:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(23, 135, 130, 0.3);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+            
+            .work-hero h1 {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .work-hero {
+                padding: calc(var(--header-height) + 40px) 0 var(--space-xl);
+            }
+            
+            .work-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .work-hero .subtitle {
+                font-size: 1.2rem;
+                padding: 0 var(--space-md);
+            }
+            
+            .project-stats {
+                gap: var(--space-xl);
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .filter-tabs {
+                gap: var(--space-xs);
+                padding: 0 var(--space-md);
+            }
+            
+            .filter-tab {
+                padding: var(--space-xs) var(--space-lg);
+                font-size: 0.9rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-footer {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stat-item {
+                flex: 0 0 calc(50% - var(--space-md));
+            }
+            
+            .project-image {
+                height: 180px;
+            }
+            
+            .project-content {
+                padding: var(--space-lg);
+            }
+            
+            .project-title {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand">Leena Sri K</a>
+            
+            <button class="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <nav class="main-nav" role="navigation" aria-label="Main Navigation">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="profile.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="work.html" class="nav-link active">
+                    <i class="fas fa-code"></i>
+                    <span>Work</span>
+                </a>
+                <a href="credentials.html" class="nav-link">
+                    <i class="fas fa-award"></i>
+                    <span>Credentials</span>
+                </a>
+                <a href="assets/resume.pdf" target="_blank" rel="noopener" class="nav-link resume">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>Resume</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Work Hero -->
+        <section class="work-hero">
+            <div class="container">
+                <h1>My Projects</h1>
+                <p class="subtitle">A curated selection of engineering projects showcasing experience in full-stack development, cloud fundamentals, data structures, and applied computing.</p>
+                
+                <div class="project-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">4+</div>
+                        <div class="stat-label">Major Projects</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Technologies Used</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Code Quality</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter Tabs -->
+        <section class="section">
+            <div class="container">
+                <div class="filter-tabs">
+                    <div class="filter-tab active" data-filter="all">
+                        <i class="fas fa-layer-group"></i>
+                        <span>All Projects</span>
+                    </div>
+                    <div class="filter-tab" data-filter="datastructures">
+                        <i class="fas fa-code"></i>
+                        <span>Data Structures</span>
+                    </div>
+                    <div class="filter-tab" data-filter="desktop">
+                        <i class="fas fa-desktop"></i>
+                        <span>Desktop Apps</span>
+                    </div>
+                    <div class="filter-tab" data-filter="ai">
+                        <i class="fas fa-robot"></i>
+                        <span>AI/ML</span>
+                    </div>
+                    <div class="filter-tab" data-filter="edge">
+                        <i class="fas fa-network-wired"></i>
+                        <span>Edge Computing</span>
+                    </div>
+                </div>
+
+                <!-- Projects Grid -->
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card" data-tech="datastructures python">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop&auto=format" alt="Cache system data flow diagram" loading="lazy">
+                            <div class="project-badge">Featured</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">
+                                <i class="fas fa-bolt"></i>
+                                <span>Dynamic Cache System</span>
+                            </h3>
+                            <p class="project-description">
+                                A menu-driven Python application implementing LRU and LFU cache eviction policies using Doubly Linked Lists and HashMaps. Features O(1) operations, write-through caching, real-time performance metrics, and interactive console interface.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Data Structures</span>
+                                <span class="tech-tag">Algorithms</span>
+                                <span class="tech-tag">OOP</span>
+                                <span class="tech-tag">Cache Systems</span>
+                            </div>
+                            <!-- Project 1 - Dynamic Cache System -->
+                            <div class="project-footer">
+                                <a href="https://github.com/leena0110/dynamic-cache-system" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                class="btn btn-secondary">
+                                    <i class="fab fa-github"></i> View Source Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2 -->
+                    <div class="project-card" data-tech="ai python">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=400&fit=crop&auto=format" alt="Natural language processing visualization" loading="lazy">
+                            <div class="project-badge">AI Powered</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">
+                                <i class="fas fa-spell-check"></i>
+                                <span>NLP Proofreading Pipeline</span>
+                            </h3>
+                            <p class="project-description">
+                                A two-phase NLP pipeline implementing text correction with synthetic noise generation, PySpellChecker, and transformer models (FLAN-T5 & T5-Base-Grammar-Correction). Features comprehensive evaluation metrics including Error Ratio (30%) and Diff Meaning Ratio (58%).
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">NLP</span>
+                                <span class="tech-tag">Transformers</span>
+                                <span class="tech-tag">Machine Learning</span>
+                                <span class="tech-tag">PyTorch</span>
+                            </div>
+                            <div class="project-footer">
+                                <a href="https://github.com/leena0110/proofread_eval_pipeline" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                class="btn btn-secondary">
+                                    <i class="fab fa-github"></i> View Source
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 3 -->
+                    <div class="project-card" data-tech="edge python">
+                        <div class="project-image">
+                            <img src="assets/812.jpg" alt="Edge computing load balancer visualization" loading="lazy">
+                            <div class="project-badge">IoT</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">
+                                <i class="fas fa-microchip"></i>
+                                <span>Edge Computing Load Balancer</span>
+                            </h3>
+                            <p class="project-description">
+                                YAFS-based digital twin simulation of Optimised Load Balancing (OLB) algorithm for healthcare IoT environments. Implements mathematical models for communication/computing latency analysis with 10 sensors and 6 fog nodes.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">YAFS</span>
+                                <span class="tech-tag">Edge Computing</span>
+                                <span class="tech-tag">Simulation</span>
+                                <span class="tech-tag">Load Balancing</span>
+                            </div>
+                            <div class="project-footer">
+                                <a href="https://github.com/leena0110/edge-computing-load-balancer" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                class="btn btn-secondary">
+                                    <i class="fab fa-github"></i> View Source
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 4 -->
+                    <div class="project-card" data-tech="desktop python">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&auto=format" alt="Data dashboard interface" loading="lazy">
+                            <div class="project-badge">Desktop</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">
+                                <i class="fas fa-cash-register"></i>
+                                <span>Billing & Inventory Management</span>
+                            </h3>
+                            <p class="project-description">
+                                Production-ready Tkinter desktop application for RITE ELECTRICALS with automated GST billing (18%), FIFO inventory management, customer credit tracking, WhatsApp digital receipts, and CSV-based data storage. Handles 500+ daily transactions efficiently.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Tkinter</span>
+                                <span class="tech-tag">CSV</span>
+                                <span class="tech-tag">Desktop App</span>
+                                <span class="tech-tag">WhatsApp API</span>
+                            </div>
+                            <div class="project-footer">
+                                <a href="https://github.com/leena0110/billing-inventory-system" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                class="btn btn-secondary">
+                                    <i class="fab fa-github"></i> View Source
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View More Section -->
+                <div class="view-more">
+                    <h3>More Projects Coming Soon!</h3>
+                    <p>I'm constantly working on new projects and expanding my skills. Stay tuned for more exciting work in cloud computing, full-stack development, and AI applications.</p>
+                    <a href="profile.html" class="btn btn-outline">
+                        <i class="fas fa-user-check"></i> View My Profile
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Personal Info -->
+                <div class="footer-col">
+                    <h4 class="footer-title">Leena Sri K</h4>
+                    <p class="footer-subtitle">Computer Science Engineer</p>
+                    <p class="footer-location">Coimbatore, Tamil Nadu</p>
+                </div>
+                
+                <!-- Social Links -->
+                <div class="footer-col">
+                    <h4 class="footer-title">Connect</h4>
+                    <div class="footer-social">
+                        <a href="https://github.com/leena0110" target="_blank" class="social-btn">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="https://linkedin.com/in/leena-sri-k-65828a393" target="_blank" class="social-btn">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                        <a href="mailto:leenasri0110@gmail.com" class="social-btn">
+                            <i class="fas fa-envelope"></i> Email
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; <span id="current-year">2025</span> Leena Sri K. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
+    
+    <!-- Work Page Specific Script -->
+    <script>
+        // Filter projects functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterTabs = document.querySelectorAll('.filter-tab');
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            // Initialize with all projects visible
+            showAllProjects();
+            
+            // Add click event to filter tabs
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Update active tab
+                    filterTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter projects
+                    if (filter === 'all') {
+                        showAllProjects();
+                    } else {
+                        filterProjects(filter);
+                    }
+                });
+            });
+            
+            function showAllProjects() {
+                projectCards.forEach(card => {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 10);
+                });
+            }
+            
+            function filterProjects(tech) {
+                projectCards.forEach(card => {
+                    const cardTech = card.getAttribute('data-tech');
+                    if (tech === 'all' || cardTech.includes(tech)) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            }
+            
+            // Button hover effects
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('btn-disabled')) {
+                        this.style.transform = 'translateY(-3px)';
+                    }
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('btn-disabled')) {
+                        this.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+            
+            // Current year for copyright
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html> 

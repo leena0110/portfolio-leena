@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Demo | Leena Sri K</title>
+    
+    <!-- Fonts & Icons - Updated to Manrope -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Headings font -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        
+     
+    <!-- Body font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- OTP Demo specific styles -->
+    <style>
+        .otp-demo-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: var(--space-xl) 0;
+        }
+        
+        .otp-card {
+            background: var(--card-bg);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+        
+        .otp-card:hover {
+            box-shadow: 0 24px 72px rgba(23, 133, 130, 0.2);
+            border-color: var(--secondary-color);
+        }
+        
+        .otp-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .otp-header i {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: var(--space-md);
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .otp-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: var(--space-xs);
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+        
+        .otp-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: var(--space-xs);
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: var(--space-sm) var(--space-md);
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: 'Manrope', sans-serif;
+            font-size: 1rem;
+            transition: all var(--transition-normal);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(23, 133, 130, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .otp-inputs {
+            display: flex;
+            gap: var(--space-sm);
+            justify-content: center;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .otp-input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: 'Manrope', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .otp-input:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(23, 133, 130, 0.2);
+            transform: scale(1.05);
+        }
+        
+        .form-group small {
+            display: block;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: var(--space-xs);
+        }
+        
+        .otp-message {
+            margin-top: var(--space-lg);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            text-align: center;
+            display: none;
+            font-weight: 500;
+            font-family: 'Manrope', sans-serif;
+        }
+        
+        .otp-message.success {
+            background: rgba(23, 133, 130, 0.1);
+            color: var(--secondary-color);
+            border: 1px solid rgba(23, 133, 130, 0.3);
+        }
+        
+        .otp-message.error {
+            background: rgba(255, 87, 87, 0.1);
+            color: #ff5757;
+            border: 1px solid rgba(255, 87, 87, 0.3);
+        }
+        
+        .otp-actions {
+            display: flex;
+            gap: var(--space-sm);
+            justify-content: center;
+            margin-top: var(--space-xl);
+        }
+        
+        #otp-submit {
+            padding: var(--space-sm) var(--space-2xl);
+            font-weight: 600;
+            font-size: 1rem;
+            font-family: 'Manrope', sans-serif;
+        }
+        
+        #otp-reset {
+            padding: var(--space-sm) var(--space-2xl);
+            font-weight: 600;
+            font-size: 1rem;
+            font-family: 'Manrope', sans-serif;
+        }
+        
+        .mt-4 {
+            margin-top: var(--space-xl);
+            padding: var(--space-lg);
+            background: var(--surface-alt);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .mt-4 p {
+            color: var(--text-muted);
+            margin-bottom: var(--space-sm);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .mt-4 p strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .otp-demo-container {
+                padding: var(--space-lg) 0;
+            }
+            
+            .otp-card {
+                padding: var(--space-lg);
+            }
+            
+            .otp-input {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .otp-actions {
+                flex-direction: column;
+            }
+            
+            .otp-actions .btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .otp-inputs {
+                gap: var(--space-xs);
+            }
+            
+            .otp-input {
+                width: 35px;
+                height: 35px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand">Leena Sri K</a>
+            
+            <button class="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <nav class="main-nav" role="navigation" aria-label="Main Navigation">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="profile.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="work.html" class="nav-link">
+                    <i class="fas fa-code"></i>
+                    <span>Work</span>
+                </a>
+                <a href="credentials.html" class="nav-link">
+                    <i class="fas fa-award"></i>
+                    <span>Credentials</span>
+                </a>
+                <a href="assets/resume.pdf" target="_blank" rel="noopener" class="nav-link resume">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>Resume</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- OTP Demo Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">OTP Authentication Demo</h2>
+                    <p class="section-subtitle">Frontend simulation of email-based OTP verification system</p>
+                </div>
+                
+                <div class="otp-demo-container">
+                    <div class="otp-card">
+                        <div class="otp-header">
+                            <i class="fas fa-lock"></i>
+                            <h3>Email Verification</h3>
+                            <p>Simulated OTP flow for demonstration purposes</p>
+                        </div>
+                        
+                        <form id="otp-form">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" class="form-control" placeholder="leenasri0110@gmail.com" required>
+                            </div>
+                            
+                            <div id="otp-group" style="display: none;">
+                                <div class="form-group">
+                                    <label for="otp">Enter 6-digit OTP</label>
+                                    <div class="otp-inputs">
+                                        <input type="text" class="otp-input" maxlength="1" inputmode="numeric">
+                                        <input type="text" class="otp-input" maxlength="1" inputmode="numeric">
+                                        <input type="text" class="otp-input" maxlength="1" inputmode="numeric">
+                                        <input type="text" class="otp-input" maxlength="1" inputmode="numeric">
+                                        <input type="text" class="otp-input" maxlength="1" inputmode="numeric">
+                                        <input type="text" class="otp-input" maxlength="1" inputmode="numeric">
+                                    </div>
+                                    <small>Enter the 6-digit code sent to your email</small>
+                                </div>
+                            </div>
+                            
+                            <div id="otp-message" class="otp-message"></div>
+                            
+                            <div class="otp-actions">
+                                <button type="submit" id="otp-submit" class="btn btn-primary">
+                                    Send OTP
+                                </button>
+                                <button type="button" id="otp-reset" class="btn btn-secondary">
+                                    Reset
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div class="mt-4">
+                            <p><strong>Note:</strong> This is a frontend simulation. The OTP will be displayed in the browser console for testing purposes.</p>
+                            <p>In a production environment, this would connect to a backend service that sends real OTPs via email or SMS.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p>Leena Sri K</p>
+                    <p>Computer Science Engineer</p>
+                    <p>Coimbatore, Tamil Nadu</p>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="profile.html">Profile</a>
+                    <a href="work.html">Work</a>
+                    <a href="credentials.html">Credentials</a>
+                    <a href="otp-demo.html">OTP Demo</a>
+                </div>
+                
+                <div class="footer-copyright">
+                    <p>&copy; <span id="current-year">2025</span> Leena Sri K. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
+</body>
+</html>

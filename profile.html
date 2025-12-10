@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | Leena Sri K</title>
+    <meta name="description" content="Profile and background of Leena Sri K - Education, skills, and career objectives.">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Profile page specific styles -->
+    <style>
+        /* Profile page animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Profile specific styles */
+        .profile-hero {
+            background: linear-gradient(135deg, rgba(10, 24, 40, 0.9), rgba(16, 34, 56, 0.9));
+            padding: calc(var(--header-height) + 40px) 0 var(--space-xl);
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .profile-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: var(--space-sm);
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .profile-hero .subtitle {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            font-weight: 500;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        /* Two column layout for bio */
+        .bio-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .bio-card {
+            background: var(--card-bg);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            animation: slideInLeft 0.8s ease-out;
+        }
+        
+        .bio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--secondary-color);
+        }
+        
+        .bio-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .bio-card h3 i {
+            font-size: 1.3rem;
+        }
+        
+        .bio-text {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        
+        .bio-text p {
+            margin-bottom: var(--space-md);
+        }
+        
+        /* Education cards */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .edu-card {
+            background: var(--card-bg);
+            padding: var(--space-lg); /* Reduced from var(--space-xl) */
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .edu-card:nth-child(1) { animation-delay: 0.1s; }
+        .edu-card:nth-child(2) { animation-delay: 0.2s; }
+        .edu-card:nth-child(3) { animation-delay: 0.3s; }
+        
+        .edu-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--secondary-color);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .edu-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .edu-icon {
+            width: 50px; /* Reduced from 60px */
+            height: 50px; /* Reduced from 60px */
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem; /* Reduced from 1.5rem */
+            flex-shrink: 0;
+        }
+
+        .edu-content h3 {
+            font-size: 1.2rem; /* Reduced from 1.4rem */
+            margin-bottom: var(--space-xs);
+            color: var(--text-primary);
+        }
+        
+        .edu-meta {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            font-size: 1rem;
+        }
+        
+        .edu-duration {
+            background: var(--surface-alt);
+            color: var(--accent-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        /* Skills section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .skill-category-card {
+            background: var(--card-bg);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            animation: slideInRight 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .skill-category-card:nth-child(1) { animation-delay: 0.1s; }
+        .skill-category-card:nth-child(2) { animation-delay: 0.2s; }
+        .skill-category-card:nth-child(3) { animation-delay: 0.3s; }
+        .skill-category-card:nth-child(4) { animation-delay: 0.4s; }
+        .skill-category-card:nth-child(5) { animation-delay: 0.5s; }
+        
+        .skill-category-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary-color);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .skill-category-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-sm);
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .skill-category-header i {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .skill-category-header h3 {
+            color: var(--text-primary);
+            font-size: 1.3rem;
+        }
+        
+        .skill-items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: var(--space-sm);
+        }
+        
+        .skill-item {
+            background: var(--surface-alt);
+            padding: var(--space-sm);
+            border-radius: var(--radius-md);
+            text-align: center;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+            border-color: var(--secondary-color);
+        }
+        
+        .skill-item i {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: var(--space-xs);
+            color: var(--accent-color);
+        }
+        
+        .skill-item:hover i {
+            color: white;
+        }
+        
+        .skill-tag {
+            display: inline-block;
+            background: var(--surface-alt);
+            color: var(--text-primary);
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-tag:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+            border-color: var(--secondary-color);
+        }
+        
+        /* Soft skills */
+        .soft-skills-container {
+            background: linear-gradient(135deg, rgba(23, 133, 130, 0.1), rgba(191, 161, 129, 0.1));
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(23, 133, 130, 0.2);
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .soft-skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+        
+        .soft-skill-item {
+            background: white;
+            color: var(--primary-color);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        
+        .soft-skill-item:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .bio-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .education-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .work-hero {
+                padding: calc(var(--header-height) + 30px) 0 var(--space-md); /* Reduced */
+            }
+            
+            .work-hero h1 {
+                font-size: 2.2rem; /* Reduced from 2.5rem */
+            }
+            
+            .work-hero .subtitle {
+                font-size: 1.1rem; /* Reduced from 1.2rem */
+                padding: 0 var(--space-md);
+            }
+            
+            .project-stats {
+                gap: var(--space-lg); /* Reduced from var(--space-xl) */
+            }
+            
+            .stat-number {
+                font-size: 2rem; /* Reduced from 2.5rem */
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg); /* Reduced from var(--space-2xl) */
+            }
+            
+            .project-image {
+                height: 160px; /* Reduced from 180px */
+            }
+            
+            .project-content {
+                padding: var(--space-md); /* Reduced from var(--space-lg) */
+            }
+            
+            .project-title {
+                font-size: 1.3rem; /* Reduced from 1.4rem */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-image {
+                height: 140px; /* Reduced from 180px */
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-md); /* Even smaller gap on mobile */
+            }
+            
+            .filter-tab {
+                padding: 6px 16px; /* Smaller on mobile */
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand">Leena Sri K</a>
+            
+            <button class="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <nav class="main-nav" role="navigation" aria-label="Main Navigation">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="profile.html" class="nav-link active">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="work.html" class="nav-link">
+                    <i class="fas fa-code"></i>
+                    <span>Work</span>
+                </a>
+                <a href="credentials.html" class="nav-link">
+                    <i class="fas fa-award"></i>
+                    <span>Credentials</span>
+                </a>
+                <a href="assets/resume.pdf" target="_blank" rel="noopener" class="nav-link resume">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>Resume</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Profile Hero -->
+        <section class="profile-hero">
+            <div class="container">
+                <h1>My Profile</h1>
+                <p class="subtitle">Education, Skills & Career Journey</p>
+            </div>
+        </section>
+
+        <!-- Bio Section -->
+        <section class="section">
+            <div class="container">
+                <div class="bio-section">
+                    <div class="bio-card">
+                        <h3><i class="fas fa-user-graduate"></i> About Me</h3>
+                        <div class="bio-text">
+                            <p>I am a B.Tech Computer Science and Engineering student at Amrita Vishwa Vidyapeetham with a strong interest in front-end development, full-stack engineering, and cloud technologies.</p>
+                            <p>I enjoy building clean, user-focused solutions and exploring modern tools that help me grow both technically and creatively.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bio-card">
+                        <h3><i class="fas fa-bullseye"></i> Career Objective</h3>
+                        <div class="bio-text">
+                            <p>To continuously learn, innovate, and grow into a versatile engineer capable of delivering impactful, high-quality solutions.</p>
+                            <p>I aim to contribute meaningfully to real-world projects while strengthening my expertise in web development and cloud computing.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="section-header">
+                    <h2>Education</h2>
+                </div>
+
+                <div class="education-grid">
+                    <div class="edu-card featured">
+                        <div class="edu-header">
+                            <div class="edu-icon featured-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <div class="edu-content">
+                                <h3>B.Tech Computer Science & Engineering</h3>
+                                <p class="edu-meta">Amrita Vishwa Vidyapeetham</p>
+                                <span class="edu-duration">2023 – 2027 | CGPA: 8.04</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Skills -->
+                <div class="section-header">
+                    <h2>Technical Skills</h2>
+                </div>
+                
+                <div class="skills-container">
+                    <!-- Programming Languages -->
+                    <div class="skill-category-card">
+                        <div class="skill-category-header">
+                            <i class="fas fa-code"></i>
+                            <h3>Programming Languages</h3>
+                        </div>
+                        <div class="skill-items-grid">
+                            <div class="skill-item">
+                                <i class="fab fa-cuttlefish"></i>
+                                <span>C/C++</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-java"></i>
+                                <span>Java</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-python"></i>
+                                <span>Python</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-js"></i>
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-html5"></i>
+                                <span>HTML5</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-css3-alt"></i>
+                                <span>CSS3</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-database"></i>
+                                <span>SQL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Frameworks & Libraries -->
+                    <div class="skill-category-card">
+                        <div class="skill-category-header">
+                            <i class="fas fa-cubes"></i>
+                            <h3>Frameworks & Libraries</h3>
+                        </div>
+                        <div class="skill-items-grid">
+                            <div class="skill-item">
+                                <i class="fas fa-window-maximize"></i>
+                                <span>Tkinter</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-calculator"></i>
+                                <span>NumPy</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-table"></i>
+                                <span>Pandas</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Matplotlib</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Databases -->
+                    <div class="skill-category-card">
+                        <div class="skill-category-header">
+                            <i class="fas fa-database"></i>
+                            <h3>Databases</h3>
+                        </div>
+                        <div class="skill-items-grid">
+                            <div class="skill-item">
+                                <i class="fas fa-database"></i>
+                                <span>MySQL</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-database"></i>
+                                <span>PostgreSQL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tools & Technologies -->
+                    <div class="skill-category-card">
+                        <div class="skill-category-header">
+                            <i class="fas fa-tools"></i>
+                            <h3>Tools & Technologies</h3>
+                        </div>
+                        <div class="skill-items-grid">
+                            <div class="skill-item">
+                                <i class="fab fa-git-alt"></i>
+                                <span>Git</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-linux"></i>
+                                <span>Linux CLI</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-code"></i>
+                                <span>VS Code</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-book"></i>
+                                <span>Jupyter</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-aws"></i>
+                                <span>AWS-Cloud Fundamentals</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soft Skills -->
+                <div class="section-header">
+                    <h2>Soft Skills</h2>
+                </div>
+                
+                <div class="soft-skills-container">
+                    <div class="soft-skills-grid">
+                        <div class="soft-skill-item">Problem-solving</div>
+                        <div class="soft-skill-item">Time Management</div>
+                        <div class="soft-skill-item">Critical Thinking</div>
+                        <div class="soft-skill-item">Initiative & Self-Motivation</div>
+                        <div class="soft-skill-item">Creativity</div>
+                        <div class="soft-skill-item">Adaptability</div>
+                        <div class="soft-skill-item">Collaboration</div>
+                        <div class="soft-skill-item">Communication</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Personal Info -->
+                <div class="footer-col">
+                    <h4 class="footer-title">Leena Sri K</h4>
+                    <p class="footer-subtitle">Computer Science Engineer</p>
+                    <p class="footer-location">Coimbatore, Tamil Nadu</p>
+                </div>
+                
+                <!-- Social Links -->
+                <div class="footer-col">
+                    <h4 class="footer-title">Connect</h4>
+                    <div class="footer-social">
+                        <a href="https://github.com/leena0110" target="_blank" class="social-btn">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="https://linkedin.com/in/leena-sri-k-65828a393" target="_blank" class="social-btn">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                        <a href="mailto:leenasri0110@gmail.com" class="social-btn">
+                            <i class="fas fa-envelope"></i> Email
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; <span id="current-year">2025</span> Leena Sri K. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
+</body>
+</html>

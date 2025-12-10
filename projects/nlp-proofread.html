@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NLP Proofreading Pipeline | Leena Sri K</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- Project-specific styles -->
+    <style>
+        .project-hero {
+            background: linear-gradient(135deg, #0A1828 0%, #102238 100%);
+            padding: calc(var(--header-height) + 40px) 0 var(--space-xl);
+            color: var(--text-primary);
+        }
+        
+        .project-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .project-impact {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            margin-bottom: var(--space-xl);
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        
+        .project-meta {
+            display: flex;
+            gap: var(--space-2xl);
+            flex-wrap: wrap;
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: 2px solid rgba(23, 133, 130, 0.3);
+        }
+        
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .meta-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        .meta-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        
+        .project-detail-section {
+            padding: var(--space-xl) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .project-detail-section:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--space-xl);
+        }
+        
+        .detail-label h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin: 0;
+            font-weight: 700;
+        }
+        
+        .detail-content {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        
+        .detail-content p {
+            margin-bottom: var(--space-md);
+        }
+        
+        .detail-content ul {
+            margin-left: var(--space-lg);
+            margin-bottom: var(--space-md);
+        }
+        
+        .detail-content li {
+            margin-bottom: var(--space-xs);
+            color: var(--text-secondary);
+        }
+        
+        .detail-content strong {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .phase-container {
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .phase-header {
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-lg);
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .pipeline-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+        
+        .pipeline-step {
+            background: var(--card-bg);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .pipeline-step:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary-color);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            width: 40px;
+            height: 40px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .step-title {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+            font-weight: 600;
+        }
+        
+        .file-structure {
+            background: var(--surface-alt);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            margin: var(--space-lg) 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .file-structure pre {
+            margin: 0;
+            overflow-x: auto;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+        
+        .metric-card {
+            background: var(--card-bg);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--secondary-color);
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .metric-description {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: var(--space-sm);
+        }
+        
+        .model-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+        
+        .model-card {
+            background: var(--card-bg);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .model-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary-color);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .model-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+        
+        .model-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .model-name {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .model-specs {
+            margin-top: var(--space-md);
+        }
+        
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-xs) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+        
+        .spec-label {
+            color: var(--text-secondary);
+        }
+        
+        .spec-value {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: var(--space-md);
+            margin-top: var(--space-md);
+            flex-wrap: wrap;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-top: var(--space-2xl);
+            padding: var(--space-sm) var(--space-lg);
+            border: 2px solid var(--secondary-color);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background: var(--secondary-color);
+            color: white;
+            gap: var(--space-md);
+            transform: translateX(-5px);
+        }
+        
+        .btn-disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            position: relative;
+        }
+        
+        .btn-disabled:hover::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            white-space: nowrap;
+            margin-bottom: var(--space-xs);
+        }
+        
+        @media (max-width: 768px) {
+            .project-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .project-impact {
+                font-size: 1.2rem;
+            }
+            
+            .detail-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+            }
+            
+            .project-meta {
+                flex-direction: column;
+                gap: var(--space-lg);
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+            
+            .pipeline-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .model-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="../index.html" class="brand">Leena Sri K</a>
+            
+            <button class="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <nav class="main-nav" role="navigation" aria-label="Main Navigation">
+                <a href="../index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="../profile.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="../work.html" class="nav-link">
+                    <i class="fas fa-code"></i>
+                    <span>Work</span>
+                </a>
+                <a href="../credentials.html" class="nav-link">
+                    <i class="fas fa-award"></i>
+                    <span>Credentials</span>
+                </a>
+                <a href="../assets/resume.pdf" target="_blank" rel="noopener" class="nav-link resume">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>Resume</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Project Hero -->
+        <section class="project-hero">
+            <div class="container">
+                <div class="project-hero-content">
+                    <h1>NLP Proofreading Pipeline</h1>
+                    <p class="project-impact">A multi-stage text correction system with synthetic noise generation and transformer-based grammar correction</p>
+                    
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Course</span>
+                            <span class="meta-value">23CSE471 NLP Case Study</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Domain</span>
+                            <span class="meta-value">Grammar & Spelling Correction</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Timeline</span>
+                            <span class="meta-value">2 Months (Two Phases)</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Status</span>
+                            <span class="meta-value">Completed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Details -->
+        <section class="section">
+            <div class="container">
+                <!-- Project Overview -->
+                <div class="project-detail-section">
+                    <div class="detail-grid">
+                        <div class="detail-label">
+                            <h3>Project Overview</h3>
+                        </div>
+                        <div class="detail-content">
+                            <p><strong>Paper Title:</strong> Proofread: Fixes All Errors with One Tap</p>
+                            <p>This project demonstrates a text correction pipeline that simulates noisy data and progressively improves it through:</p>
+                            <ul>
+                                <li><strong>Noise Injection</strong> – Introduce spelling and grammar errors into clean text</li>
+                                <li><strong>Spelling Correction</strong> – Fix spelling errors using PySpellChecker library</li>
+                                <li><strong>Grammar Correction</strong> – Refine the text using transformer models (FLAN-T5 & T5-Base-Grammar-Correction)</li>
+                            </ul>
+                            <p>The pipeline implements a complete NLP system for automated proofreading with comprehensive evaluation metrics.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 1: FLAN-T5 Pipeline -->
+                <div class="project-detail-section">
+                    <div class="phase-container">
+                        <div class="phase-header">
+                            <i class="fas fa-cogs"></i>
+                            Phase 1: FLAN-T5 Proofreading Pipeline
+                        </div>
+                        
+                        <div class="pipeline-steps">
+                            <div class="pipeline-step">
+                                <div class="step-number">1</div>
+                                <h4 class="step-title">Data Preparation</h4>
+                                <p>Introduce random spelling mistakes, word swaps, and character-level noise into clean sentences. Store results in <code>noisy_sentences.txt</code></p>
+                            </div>
+                            
+                            <div class="pipeline-step">
+                                <div class="step-number">2</div>
+                                <h4 class="step-title">Spelling Correction</h4>
+                                <p>Use PySpellChecker library with frequency-based algorithms to detect and correct misspelled words. Output saved in <code>spell_corrected_sentences.txt</code></p>
+                            </div>
+                            
+                            <div class="pipeline-step">
+                                <div class="step-number">3</div>
+                                <h4 class="step-title">Grammar Correction (FLAN-T5)</h4>
+                                <p>Fine-tuned version of Google's T5 model with 250M parameters that treats every NLP task as text-to-text problem. Final outputs stored in <code>final_corrected_sentences.txt</code></p>
+                            </div>
+                        </div>
+                        
+                        <div class="file-structure">
+                            <pre># Phase 1 File Structure
+proofread_eval_pipeline/
+├── noisy_sentences.txt          # Sentences with synthetic random errors
+├── spell_corrected_sentences.txt # After spelling correction
+├── final_corrected_sentences.txt # After grammar correction (FLAN-T5)
+├── build_raw.py                 # Script to preprocess data and introduce noise
+├── spell_corrector.py           # Script for spelling correction
+└── grammar_corrector.ipynb      # Notebook for FLAN-T5 grammar correction</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 2: Advanced Pipeline -->
+                <div class="project-detail-section">
+                    <div class="phase-container">
+                        <div class="phase-header">
+                            <i class="fas fa-rocket"></i>
+                            Phase 2: Advanced Grammar & Spelling Correction Pipeline
+                        </div>
+                        
+                        <div class="detail-content">
+                            <p><strong>Based on Paper:</strong> Proofread — Fixes All Errors with One Tap</p>
+                            <p>Extended the pipeline using a more advanced Small Language Model (SLM) from Hugging Face — <code>vennify/t5-base-grammar-correction</code> that performs both grammar and minor spelling corrections with better fluency and contextual accuracy.</p>
+                            
+                            <div class="file-structure">
+                                <pre># Phase 2 Folder Structure
+phase2_Review/
+├── input_texts/                 # Clean text files
+│   ├── file1.txt
+│   ├── file2.txt
+│   └── file3.txt
+├── noisy_texts/                 # Manually introduced errors
+│   ├── file1_noisy.txt
+│   ├── file2_noisy.txt
+│   └── file3_noisy.txt
+├── corrected_texts/             # Model corrected outputs
+│   ├── file1_corrected.txt
+│   ├── file2_corrected.txt
+│   └── file3_corrected.txt
+├── 00_data_prep.ipynb           # Data preparation notebook
+├── 01_grammar_error_correction.ipynb  # Grammar correction notebook
+├── 02_evaluation_metrics.ipynb  # Evaluation metrics notebook
+└── README.md</pre>
+                            </div>
+                            
+                            <div class="pipeline-steps">
+                                <div class="pipeline-step">
+                                    <div class="step-number">1</div>
+                                    <h4 class="step-title">Data Preparation</h4>
+                                    <p>Simulate realistic human-like writing errors with tense errors, article misuse, and letter repetition. Save modified versions in <code>noisy_texts/</code></p>
+                                </div>
+                                
+                                <div class="pipeline-step">
+                                    <div class="step-number">2</div>
+                                    <h4 class="step-title">Grammar Correction</h4>
+                                    <p>Use <code>vennify/t5-base-grammar-correction</code> - a fine-tuned T5-Base model specifically designed for Grammar Error Correction (GEC) tasks using the prefix "gec:"</p>
+                                </div>
+                                
+                                <div class="pipeline-step">
+                                    <div class="step-number">3</div>
+                                    <h4 class="step-title">Evaluation Metrics</h4>
+                                    <p>Word-level and line-level comparisons between Clean → Noisy → Corrected text files with comprehensive metrics analysis</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Evaluation Metrics -->
+                <div class="project-detail-section">
+                    <div class="detail-label">
+                        <h3>Evaluation Metrics</h3>
+                    </div>
+                    <div class="detail-content">
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">30%</div>
+                                <div class="metric-label">Error Ratio</div>
+                                <div class="metric-description">Fraction of corrected sentences still containing grammatical errors after correction</div>
+                            </div>
+                            
+                            <div class="metric-card">
+                                <div class="metric-value">58%</div>
+                                <div class="metric-label">Diff Meaning Ratio</div>
+                                <div class="metric-description">Fraction of corrected sentences whose meaning differs from original</div>
+                            </div>
+                            
+                            <div class="metric-card">
+                                <div class="metric-label">Good Ratio</div>
+                                <div class="metric-description">Sentences that are both grammatically correct AND preserve original meaning</div>
+                            </div>
+                            
+                            <div class="metric-card">
+                                <div class="metric-label">Bad Ratio</div>
+                                <div class="metric-description">Sentences that either contain grammar errors OR have altered meaning</div>
+                            </div>
+                        </div>
+                        
+                        <div class="model-comparison">
+                            <div class="model-card">
+                                <div class="model-header">
+                                    <div class="model-icon">
+                                        <i class="fas fa-robot"></i>
+                                    </div>
+                                    <div class="model-name">FLAN-T5 Base</div>
+                                </div>
+                                <p><strong>Why Chosen:</strong> Open-source, well-documented, lightweight (250M parameters), practical for fine-tuning on limited resources, good for academic projects.</p>
+                                <div class="model-specs">
+                                    <div class="spec-item">
+                                        <span class="spec-label">Parameters</span>
+                                        <span class="spec-value">250M</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-label">Type</span>
+                                        <span class="spec-value">Text-to-Text Transformer</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-label">Use Case</span>
+                                        <span class="spec-value">Generic Grammar Correction</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="model-card">
+                                <div class="model-header">
+                                    <div class="model-icon">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <div class="model-name">T5-Base-Grammar-Correction</div>
+                                </div>
+                                <p><strong>Why Chosen:</strong> Fine-tuned specifically for GEC tasks, lightweight (runs without GPU), more accurate than generic models, pre-trained for grammar correction.</p>
+                                <div class="model-specs">
+                                    <div class="spec-item">
+                                        <span class="spec-label">Model</span>
+                                        <span class="spec-value">vennify/t5-base-grammar-correction</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-label">Prefix</span>
+                                        <span class="spec-value">"gec:"</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-label">Specialization</span>
+                                        <span class="spec-value">Grammar Error Correction (GEC)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Implementation -->
+                <div class="project-detail-section">
+                    <div class="detail-grid">
+                        <div class="detail-label">
+                            <h3>Technical Implementation</h3>
+                        </div>
+                        <div class="detail-content">
+                            <p><strong>Key Libraries & Tools:</strong></p>
+                            <ul>
+                                <li><strong>Python Libraries:</strong> PySpellChecker, Transformers (Hugging Face), Torch, Pandas</li>
+                                <li><strong>Models Used:</strong> FLAN-T5 Base, vennify/t5-base-grammar-correction</li>
+                                <li><strong>Platform:</strong> Hugging Face 🤗, Jupyter Notebooks, Google Colab</li>
+                                <li><strong>Error Types Handled:</strong> Spelling errors, grammatical tense, subject-verb agreement, article misuse</li>
+                            </ul>
+                            
+                            <p><strong>Implementation Features:</strong></p>
+                            <ul>
+                                <li>Synthetic noise generation for training data augmentation</li>
+                                <li>Multi-stage pipeline: noise injection → spelling correction → grammar correction</li>
+                                <li>Comprehensive evaluation metrics (Error Ratio, Diff Meaning Ratio, Good/Bad Ratios)</li>
+                                <li>Word-level and line-level accuracy calculations</li>
+                                <li>Context-aware grammar fixes with transformer models</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Observations & Results -->
+                <div class="project-detail-section">
+                    <div class="detail-grid">
+                        <div class="detail-label">
+                            <h3>Observations & Results</h3>
+                        </div>
+                        <div class="detail-content">
+                            <p><strong>Key Findings:</strong></p>
+                            <ul>
+                                <li>The Vennify T5 model effectively corrected grammatical tense, subject-verb agreement, and basic spelling errors</li>
+                                <li>Complex semantic inconsistencies remained in some cases (e.g., word choice changes slightly altering meaning)</li>
+                                <li>Both models showed strong generalization without fine-tuning, suitable for small-scale NLP proofreading systems</li>
+                                <li>The pipeline demonstrates practical application of transformer models for real-world text correction tasks</li>
+                                <li>Error Ratio of 30% indicates room for improvement in handling complex grammatical structures</li>
+                                <li>Diff Meaning Ratio of 58% suggests the model sometimes prioritizes grammatical correctness over meaning preservation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div class="project-detail-section">
+                    <div class="detail-label">
+                        <h3>Project Links</h3>
+                    </div>
+                    <div class="detail-content">
+                        <div class="project-links">
+                            <button class="btn btn-primary btn-disabled" title="Repository coming soon">
+                                <i class="fab fa-github"></i> View Source Code
+                            </button>
+                            <button class="btn btn-secondary btn-disabled" title="Report coming soon">
+                                <i class="fas fa-file-pdf"></i> View Project Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Back Link -->
+                <a href="../work.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back to Projects
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Personal Info -->
+                <div class="footer-col">
+                    <h4 class="footer-title">Leena Sri K</h4>
+                    <p class="footer-subtitle">Computer Science Engineer</p>
+                    <p class="footer-location">Coimbatore, Tamil Nadu</p>
+                </div>
+                
+                <!-- Social Links -->
+                <div class="footer-col">
+                    <h4 class="footer-title">Connect</h4>
+                    <div class="footer-social">
+                        <a href="https://github.com/leena0110" target="_blank" class="social-btn">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="https://linkedin.com/in/leena-sri-k-65828a393" target="_blank" class="social-btn">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                        <a href="mailto:leenasri0110@gmail.com" class="social-btn">
+                            <i class="fas fa-envelope"></i> Email
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; <span id="current-year">2025</span> Leena Sri K. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/script.js"></script>
+    <script>
+        // Set current year in copyright
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
