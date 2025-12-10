@@ -20,29 +20,31 @@ A professional, multi-page portfolio website with dark theme design. Clean, acce
 - `otp-demo.html` - OTP authentication simulation
 - `projects/` - Individual project detail pages
 
-## File Structure
-portfolio-leena/
-├── index.html # Home page
-├── profile.html # Profile page
-├── work.html # Work/projects page
-├── credentials.html # Certifications page
-├── otp-demo.html # OTP demo page
-├── css/
-│ └── style.css # Main stylesheet
-├── js/
-│ └── script.js # JavaScript functionality
-├── assets/
-│ ├── profile-placeholder.jpg
-│ ├── resume.pdf
-│ ├── certificates/ # Certificate PDFs
-│ └── project-images/ # Project screenshots
-├── projects/ # Project detail pages
-│ ├── dynamic-cache.html
-│ ├── nlp-proofread.html
-│ ├── edge-olb.html
-│ └── billing-system.html
-└── README.md
+````markdown
+## 📁 File Structure
 
+```tree
+portfolio-leena/
+├── index.html
+├── profile.html
+├── work.html
+├── credentials.html
+├── otp-demo.html
+├── css/
+│   └── style.css
+├── js/
+│   └── script.js
+├── assets/
+│   ├── profile-placeholder.jpg
+│   ├── resume.pdf
+│   ├── certificates/
+│   └── project-images/
+├── projects/
+│   ├── dynamic-cache.html
+│   ├── nlp-proofread.html
+│   ├── edge-olb.html
+│   └── billing-system.html
+└── README.md
 
 ## Design System
 
