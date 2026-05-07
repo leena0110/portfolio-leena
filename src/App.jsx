@@ -9,7 +9,7 @@ import Credentials from './pages/Credentials';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/portfolio-leena/">
       <div className="app-container">
         <Navbar />
         <main>

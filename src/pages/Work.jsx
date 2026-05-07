@@ -56,7 +56,7 @@ const Work = () => {
       description: "YAFS-based digital twin simulation of Optimised Load Balancing (OLB) algorithm for healthcare networks. Implements latency analysis across fog nodes.",
       tech: ["Python", "YAFS", "Edge Computing", "Simulation"],
       badge: "YAFS Simulation",
-      image: "/assets/812.jpg",
+      image: "assets/812.jpg",
       github: "https://github.com/leena0110/edge-computing-load-balancer",
       icon: "fa-microchip"
     },
@@ -67,7 +67,7 @@ const Work = () => {
       description: "STM32F4-based security system detecting unauthorized approach using ultrasonic sensors. Features multi-stage alerting and real-time distance monitoring.",
       tech: ["Embedded C", "STM32"],
       badge: "Embedded System",
-      image: "/assets/proximity-alarm.jpeg",
+      image: "assets/proximity-alarm.jpeg",
       github: "https://github.com/leena0110/proximity-access-alarm",
       icon: "fa-shield-alt"
     }

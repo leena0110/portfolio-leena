@@ -25,7 +25,7 @@ const Home = () => {
           <div className="hero-image">
             <div className="profile-container">
               <div className="profile-image">
-                <img src="/assets/profile-placeholder.png" alt="Leena Sri K" loading="lazy" />
+                <img src="assets/profile-placeholder.png" alt="Leena Sri K" loading="lazy" />
               </div>
               <div className="profile-border"></div>
             </div>

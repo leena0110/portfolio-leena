@@ -29,7 +29,7 @@ const Credentials = () => {
                             </p>
                         </div>
                         <div className="cert-footer">
-                            <a href="/assets/certificates/aws-cert.pdf" target="_blank" rel="noopener noreferrer" className="btn-cert btn-cert-primary">
+                            <a href="assets/certificates/aws-cert.pdf" target="_blank" rel="noopener noreferrer" className="btn-cert btn-cert-primary">
                                 <i className="fas fa-external-link-alt"></i> View Certificate
                             </a>
                         </div>
@@ -50,7 +50,7 @@ const Credentials = () => {
                             </p>
                         </div>
                         <div className="cert-footer">
-                            <a href="/assets/certificates/elevate-cert.pdf" target="_blank" rel="noopener noreferrer" className="btn-cert btn-cert-primary">
+                            <a href="assets/certificates/elevate-cert.pdf" target="_blank" rel="noopener noreferrer" className="btn-cert btn-cert-primary">
                                 <i className="fas fa-external-link-alt"></i> View Certificate
                             </a>
                         </div>
