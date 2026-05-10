@@ -30,7 +30,7 @@ const Navbar = () => {
             <i className="fas fa-award"></i>
             <span>Credentials</span>
           </NavLink>
-          <a href="/assets/resume.pdf?v=2" target="_blank" rel="noopener noreferrer" className="nav-link resume">
+          <a href="/portfolio-leena/assets/resume.pdf?v=2" target="_blank" rel="noopener noreferrer" className="nav-link resume">
             <i className="fas fa-file-pdf"></i>
             <span>Resume</span>
           </a>
