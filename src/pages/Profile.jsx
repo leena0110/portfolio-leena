@@ -43,7 +43,7 @@ const Profile = () => {
                             <div className="edu-content">
                                 <h3>B.Tech Computer Science & Engineering</h3>
                                 <p className="edu-meta">Amrita Vishwa Vidyapeetham</p>
-                                <span className="edu-duration">2023 – 2027 | CGPA: 8.03</span>
+                                <span className="edu-duration">2023 – 2027 | CGPA: 7.97</span>
                             </div>
                         </div>
                     </div>
